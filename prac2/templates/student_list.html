@@ -1,0 +1,58 @@
+<style>
+    .student-table {
+        border-collapse: collapse;
+        width: 50%;
+        border: 2px solid #333;
+    }
+    
+    .student-table th, .student-table td {
+        border: 1px solid #333;
+        padding: 4px;
+        text-align: center;
+    }
+    
+    .student-table th {
+        background-color: #4CAF50;
+        color: white;
+        font-weight: bold;
+    }
+    
+    .student-table tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+    
+    .student-table tr:hover {
+        background-color: #ddd;
+    }
+</style>
+<h2>All Students</h2>
+    
+    {% if students %}
+        <table class="student-table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Age</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for student in students %}
+        <tr>
+            <td>{{ student.id }}</td>
+            <td>{{ student.name }}</td>
+            <td>{{ student.email }}</td>
+            <td>{{ student.age }}</td>
+            <td><a href="{% url 'edit_student' student.id %}">
+        <button type="button">Edit</button>
+    </a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+    {% else %}
+        <p>No students found in the database.</p>
+    {% endif %}
+    <a href="{% url 'create_student' %}" class="btn">create Students</a>
